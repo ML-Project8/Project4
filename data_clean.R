@@ -1,5 +1,6 @@
 # THESE DATA CLEANING FUNCTIONS WERE PROVIDED IN THE CLASS DISCUSSION BY JAKE CARLSON
 
+
 # clean a data file and return a data frame
 clean_file <- function(data_file_name, agency_subset = c(), dat_header, agency_trans_table) {
     dat_raw <- readLines(data_file_name)
@@ -20,6 +21,7 @@ clean_file <- function(data_file_name, agency_subset = c(), dat_header, agency_t
 
     # make numeric fields numeric
     df$Pay <- as.numeric(as.character(df$Pay))
+    #df$Education <- as.numeric(as.character(df$Education))
 
     # replace unknowns with NA
     df$Station <- replace(df$Station, df$Station == "#########", NA)
@@ -29,7 +31,7 @@ clean_file <- function(data_file_name, agency_subset = c(), dat_header, agency_t
     df$Category <- replace(df$Category, df$Category == "" | df$Category == "*" | df$Category == "**", NA)
     df$SupervisoryStatus <- replace(df$SupervisoryStatus, df$SupervisoryStatus == "" | df$SupervisoryStatus == "*" | df$SupervisoryStatus == "**", NA)
     df$Schedule <- replace(df$Schedule, df$Schedule == "" | df$Schedule == "*" | df$Schedule == "**", NA)
-
+    
     # make ordinal fields ordered factors
     df$Age <- factor(df$Age, ordered = TRUE, levels = levels(df$Age))
     df$Education <- factor(df$Education, ordered = TRUE, levels = levels(df$Education))
@@ -43,6 +45,8 @@ clean_file <- function(data_file_name, agency_subset = c(), dat_header, agency_t
     # drop any rows with NA pay after imputation
     na_pay <- is.na(df$Pay)
     df <- df[!na_pay,]
+    
+    
 
     # handle duplicate IDs
     # not touching employees who worked at multiple agencies in a quarter
@@ -69,6 +73,8 @@ clean_file <- function(data_file_name, agency_subset = c(), dat_header, agency_t
 
     return(df)
 }
+
+
 
 # find and clean all data files
 # save cleaned data frames to csvs by year
