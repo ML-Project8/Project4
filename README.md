@@ -8,3 +8,6 @@ We're splitting education level up into 4 different classes.
 4. Graduate degree completed (17-22)
 
 For reference, I have included the number ranges of the original dataset in the classifications.
+
+
+But the question is - are these machines really learning or are they just memorizing and regurgitating information back out to us?  How can we tell the difference?  These are the questions we face when we attempt to quantify the performance of students.  How can I reach these keeds?
